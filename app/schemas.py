@@ -4,10 +4,15 @@ from datetime import datetime
 from typing import Optional
 
 
+class UserGet(BaseModel):
+    email: str
+
+
 class PostBase(BaseModel):
     title: str
     content: str
     published: bool = True
+    owner: UserGet
 
 
 class PostCreate(PostBase):
@@ -16,15 +21,12 @@ class PostCreate(PostBase):
 
 class Post(PostBase):
     created_at: datetime
+    owner_id: int
 
 
 class UserCreate(BaseModel):
     email: EmailStr
     password: str
-
-
-class UserGet(BaseModel):
-    email: str
 
 
 class UserLogin(BaseModel):
